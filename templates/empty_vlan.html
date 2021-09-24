@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="section">
+        <h2>Найти свободные вланы:</h2>
+        <!-- TODO: Create a form for inv -->
+        <form action="/find_empty_vlan" method="post">
+            <div>
+                <input name="user" placeholder="Login" type="text" required>
+            <div>
+            <div>    
+                <input name="pass" placeholder="Password" type="password" required>
+            </div>
+            <div>            
+                <input name="pe" placeholder="PE" type="text" required>
+            </div>
+
+            <input type="submit" value="НАЙТИ">
+        </form>
+    </div>
+
+    <div class="section">
+        <h2>Свободные вланы</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Vlan-id</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vid in vids %}
+                <tr>
+                    <td>{{ vid }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

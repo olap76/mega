@@ -1,0 +1,78 @@
+<!DOCTYPE html> <html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Inventory 2</title>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1>Inventory 2</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+                <h2>Создать новую запись</h2>
+                <!-- TODO: Create a form for inv -->
+                <form action="/" method="post">
+                <div>
+                    <input name="suz" placeholder="СУЗ-" type="text">
+                </div>
+                <div>
+                    <input name="client" placeholder="КЛИЕНТ" type="text">
+                </div>
+                <div>
+                    <input name="service" placeholder="УСЛУГА" type="text">
+                </div>
+                <div>
+                    <input name="desc" placeholder="DESCRIPTION" type="text">
+                </div>
+                <div>
+                    <input name="pe" placeholder="PE" type="text">
+                </div>
+                <div>
+                    <input name="pe_if" placeholder="PE_IF" type="text">
+                </div>
+                <div>
+                    <input name="vid" placeholder="VID" type="number" min="1" max="4094">
+                </div>
+
+                <input type="submit" value="СОХРАНИТЬ">
+                </form>
+            </div>
+
+            <div class="section">
+                <h2>Result</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>СУЗ</th>
+                            <th>Клиент</th>
+                            <th>Услуга</th>
+                            <th>PE</th>
+                            <th>PE_IF</th>
+                            <th>Vlan-id</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- TODO: Loop through the database entries to display them in this table -->
+                        {% for row in inv %}
+                        <tr>
+                            <td>{{ row.created }}</td>
+                            <td>{{ row.suz }}</td>
+                            <td>{{ row.client }}</td>
+                            <td>{{ row.service }}</td>
+                            <td>{{ row.pe }}</td>
+                            <td>{{ row.pe_if }}</td>
+                            <td>{{ row.vid }}</td>
+                            <td>
+                                <a href="#">
+                                    <span class="badge badge-warning">Edit</span>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body> </html>
