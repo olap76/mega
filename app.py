@@ -13,9 +13,17 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-@app.route('/', methods=('GET', 'POST'))
-@app.route('/index', methods=('GET', 'POST'))
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
+    conn = get_db_connection()
+    inv = conn.execute('SELECT * FROM inv').fetchall()
+    conn.close()
+    return render_template('index.html', inv=inv)
+
+@app.route('/new_record', methods=['GET', 'POST'])
+def new_record():
+
     if request.method == 'POST':
         suz = request.form['suz']
         client = request.form['client']
@@ -29,17 +37,16 @@ def index():
 
         conn.execute('INSERT INTO inv (suz,client,service,pe,pe_if,vid) VALUES (?, ?, ?, ?, ?, ?)',
             (suz, client, service, pe, pe_if, vid)
-        )
+            )
+
+#DEBUG
+        print("###DEBUG###: ", suz, client, service, pe, pe_if, vid)
 
         conn.commit()
         conn.close()
         return redirect(url_for('index'))
-
     else:
-        conn = get_db_connection()
-        inv = conn.execute('SELECT * FROM inv').fetchall()
-        conn.close()
-        return render_template('index.html', inv=inv)
+        return render_template('new_record.html')
 
 @app.route('/find_empty_vlan', methods=('GET', 'POST'))
 def find_empty_vlan():
@@ -65,3 +72,4 @@ def find_empty_vlan():
 
     else:
         return render_template('empty_vlan.html')
+
