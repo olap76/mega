@@ -1,0 +1,9 @@
+python3 -m venv mega_env
+
+source mega_env/bin/activate
+
+export FLASK_APP=app
+
+export FLASK_ENV=development
+
+flask run --host=0.0.0.0
